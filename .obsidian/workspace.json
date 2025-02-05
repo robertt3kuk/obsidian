@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "PKB Service.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "PKB Service"
             }
           }
         ]
@@ -170,5 +170,8 @@
     }
   },
   "active": "9df7d21b20457161",
-  "lastOpenFiles": []
+  "lastOpenFiles": [
+    "README.md",
+    "PKB Service.md"
+  ]
 }
