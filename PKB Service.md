@@ -20,7 +20,7 @@ type ArmyStatus struct{
 	ID uuid.UUID
 	Iin string 
 	Status false 
-	
+	CreatedAt time.Time
 }
 
 ```
