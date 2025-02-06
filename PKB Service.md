@@ -1,6 +1,6 @@
 Report 
 ```go 
-type Report strutct{
+type Report struct{
 	ID uuid.UUID
 	Iin string
 	Status string 
@@ -9,6 +9,12 @@ type Report strutct{
 	CreatedAt time.Time
 }
 
+type SusnSubject struct{
+	ID uuid.UUID
+	Iin string 
+	Susn bool 
+	CreatedAt time.Time	
+}
 
 ```
 
