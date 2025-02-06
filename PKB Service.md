@@ -5,7 +5,7 @@ type Report struct{
 	Iin string
 	Status string 
 	ReportID uuid.UUID
-	FoundInSources int
+	Code []string
 	CreatedAt time.Time
 }
 
@@ -14,6 +14,13 @@ type SusnSubject struct{
 	Iin string 
 	Status []string
 	CreatedAt time.Time	
+}
+
+type ArmyStatus struct{
+	ID uuid.UUID
+	Iin string 
+	Status false 
+	
 }
 
 ```
