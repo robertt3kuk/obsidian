@@ -12,7 +12,7 @@ type Report struct{
 type SusnSubject struct{
 	ID uuid.UUID
 	Iin string 
-	Susn bool 
+	Status []string
 	CreatedAt time.Time	
 }
 
