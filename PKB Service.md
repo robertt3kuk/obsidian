@@ -33,3 +33,7 @@ type SusnSubject struct{
 
 1. Если у длина статусов один и там 0 то он не сусн 
 2. Если статус коды подходят под список то он является сусн 
+
+
+# Family 
+1.[https://rmrkz.atlassian.net/wiki/spaces/ZS/pages/42729825/LOAN.INT_CLIENTDATA_UPDATE+-](https://rmrkz.atlassian.net/wiki/spaces/ZS/pages/42729825/LOAN.INT_CLIENTDATA_UPDATE+-) 
