@@ -19,5 +19,7 @@ type Report strutct{
 4. Проверка по родственным связям с кем 
 5. не отправляем ничего кроме иин и реквест айди для сусн 
 6. mariageinfo and brithinfo gbdfnl 
-7. 
+
+
+
 
