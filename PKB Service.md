@@ -44,3 +44,10 @@ type ArmyStatus struct{
 
 # Family 
 1.[https://rmrkz.atlassian.net/wiki/spaces/ZS/pages/42729825/LOAN.INT_CLIENTDATA_UPDATE+-](https://rmrkz.atlassian.net/wiki/spaces/ZS/pages/42729825/LOAN.INT_CLIENTDATA_UPDATE+-) 
+
+# Регистрация ип
+
+1. пдн различается 
+2. амл различается 
+3. убрать соид 
+4. 
