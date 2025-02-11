@@ -6,6 +6,7 @@
 	createReportEndpoint    = "https://fcbopenapi-gw-test.1cb.kz/xdata/v1/v1/report/create"
 	reportStatusEndpoint    = "https://fcbopenapi-gw-test.1cb.kz/xdata/v1/v1/report/status"
 	reportGetEndpoint       = "https://fcbopenapi-gw-test.1cb.kz/xdata/v1/v1/report/get"	
-
+	familyInfoEndpoint      = "https://fcbopenapi-gw-test.1cb.kz/family-info/get-full-info"
+	getPersonalInfoEndpoint = "/gbdflinfo/v1/clients/%s"
 
 ```
