@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PKB Service.md",
+                "file": "pkb/PKB Service.md",
                 "mode": "source",
                 "source": false
               },
@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Pkb endpoints.md",
+                "file": "pkb/Pkb endpoints.md",
                 "mode": "source",
                 "source": false
               },
@@ -184,10 +184,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "9d97df4cd2b89602",
+  "active": "f97ca5203dbba9a2",
   "lastOpenFiles": [
-    "Pkb endpoints.md",
-    "PKB Service.md",
+    "pkb",
+    "pkb/Pkb endpoints.md",
+    "pkb/PKB Service.md",
     "README.md"
   ]
 }
