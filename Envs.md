@@ -11,3 +11,13 @@
 	 PKBBRIDGE_GKB_USERNAME: c2a4f7e7-36a4-4144-ad63-4640c2951240
 	 PKBBRIDGE_GKB_PASSWORD: Zamanbank_1
 ```
+
+
+
+
+# JuicyScore 
+
+```
+
+```
+
