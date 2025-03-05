@@ -50,15 +50,17 @@
             }
           },
           {
-            "id": "bff4a5e32ee7c5d0",
+            "id": "51ea9b3f01b0a2b2",
             "type": "leaf",
             "state": {
-              "type": "release-notes",
+              "type": "markdown",
               "state": {
-                "currentVersion": "1.8.7"
+                "file": "Envs.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.8.7"
+              "icon": "lucide-file",
+              "title": "Envs"
             }
           }
         ],
@@ -210,10 +212,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bff4a5e32ee7c5d0",
+  "active": "51ea9b3f01b0a2b2",
   "lastOpenFiles": [
-    "pkb/Pkb endpoints.md",
     "sme/registration.md",
+    "Envs.md",
+    "pkb/Pkb endpoints.md",
     "sme",
     "pkb",
     "pkb/PKB Service.md",

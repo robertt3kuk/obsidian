@@ -1,0 +1,13 @@
+# PKB 
+
+
+```
+
+	 "PKBBRIDGE_PKB_BASE_URL" = https://fcbopenapi-gw-test.1cb.kz
+	 "PKBBRIDGE_PKB_ADDITIONAL_URL" = https://test2.1cb.kz
+	 "PKBBRIDGE_PKB_LOGIN" = 
+	 "PKBBRIDGE_PKB_PASSWORD"
+	 "PKBBRIDGE_GKB_BASE_URL"
+	 "PKBBRIDGE_GKB_USERNAME"
+	 "PKBBRIDGE_GKB_PASSWORD"
+```
