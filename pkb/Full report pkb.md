@@ -11,6 +11,9 @@ conset = true
 template id 
 "b8047cb1-09e6-48d2-8abf-c55d20888882"
 
+template id stage 
+"c9069364-df90-4310-b202-6a65c5cc78db"
+
 type 
 "accountOpeningApplicationSMEIP"
 
