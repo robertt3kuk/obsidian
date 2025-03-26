@@ -19,6 +19,8 @@ type
 
 user id 
 "6c5e44c3-1959-4e79-b1d4-5e9fd07fc95e"
+user id stage 
+"681977a4-ef69-4e9d-8831-9a3aa907e990"
 
 
 accountopeningSMEID dev 
