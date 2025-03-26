@@ -16,3 +16,23 @@ type
 
 user id 
 "6c5e44c3-1959-4e79-b1d4-5e9fd07fc95e"
+
+
+```json
+{
+  "phone": "+77776312871",
+  "iin": "888888888888",
+  "deviceInfo": {
+    "appVersion": "101",
+    "deviceModel": "iPhone 10",
+    "installationID": "4d41e509-1d1e-4530-a1d6-97d2d599d3f8",
+    "systemType": "iOS",
+    "systemVersion": "20.2"
+  },
+  "ipinfo": {
+    "registrationDate": "2023-05-17",
+    "registrationCert": "123456789",
+    "issuingAuthority": "Налоговая инспекция №5"
+  }
+}
+```
