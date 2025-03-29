@@ -39,32 +39,14 @@
             "id": "4cfcc404c512290d",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "sme/registration.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "registration"
-            }
-          },
-          {
-            "id": "51ea9b3f01b0a2b2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "pkb/Full report pkb.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Full report pkb"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -212,7 +194,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "51ea9b3f01b0a2b2",
+  "active": "4cfcc404c512290d",
   "lastOpenFiles": [
     "sme/registration.md",
     "pkb/Pkb endpoints.md",
