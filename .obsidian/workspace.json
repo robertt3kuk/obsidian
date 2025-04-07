@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "caddy file.md",
+                "file": "Untitled.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "caddy file"
+              "title": "Untitled"
             }
           }
         ],
@@ -242,6 +242,7 @@
   },
   "active": "d34bf14e3e3df727",
   "lastOpenFiles": [
+    "README.md",
     "caddy file.md",
     "docker compose zaman-mock.md",
     "Untitled.md",
@@ -251,7 +252,6 @@
     "sme/registration.md",
     "Envs.md",
     "sme",
-    "pkb",
-    "README.md"
+    "pkb"
   ]
 }
