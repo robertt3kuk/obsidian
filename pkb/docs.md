@@ -107,7 +107,7 @@ curl 'https://pkb-pr.zaman.redmadrobot.com/save?user_id=e1aae679-79de-4a66-9d9f-
 
 
 ```bash
-curl '[ttps://pkb-pr.zaman.redmadrobot.com/save?user_id=e1aae679-79de-4a66-9d9f-8f7fcc7a7d9c&endpoint=/xdata/v1/v1/report/create&method=POST&http_status_code=200' \
+curl 'https://pkb-pr.zaman.redmadrobot.com/save?user_id=e1aae679-79de-4a66-9d9f-8f7fcc7a7d9c&endpoint=/xdata/v1/v1/report/create&method=POST&http_status_code=200' \
   -u 'admin:secret' \
   -d '{ "ReportID": "mock-report-id-123", "ReadyPercentage": 80, "Status": "OK" }'
 ```
