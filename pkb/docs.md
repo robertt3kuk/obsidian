@@ -1,4 +1,5 @@
 
+
 # Инструкция по Сохранению Моков для PKB Bridge (pkb-pr.zaman.redmadrobot.com)
 
 ## Введение
@@ -10,17 +11,17 @@
 В зависимости от тестируемого функционала шлюза, вам может потребоваться сохранить моки для следующих методов `pkb-bridge`:
 
 **1. Сервис `users` (инициатор: `ConfirmLogin`)**
-   * [`SendJurSearchByIin`](#save-sendjursearchbyiin)
+   * [`SendJurSearchByIin`](#save-sendjursearchbyiin) (Успешный / Неуспешный - Ограничен)
    * [`GetPersonalInfoByIin`](#save-getpersonalinfobyiin)
-   * [`GetPermitDocumentsByIin`](#save-getpermitdocumentsbyiin)
+   * [`GetPermitDocumentsByIin`](#save-getpermitdocumentsbyiin) (Успешный / Неуспешный - Ограничен)
    * [`CreateReport`](#save-createreport)
    * [`GetReportStatus`](#save-getreportstatus)
-   * [`GetReport`](#save-getreport)
+   * [`GetReport`](#save-getreport) (Пример без долгов / Пример с долгами)
 
 **2. Сервис `loans` (инициатор: `sendLoanApplicationDataToPkbAndGkb`)**
    * [`SendLoanApplicationInfo` (PKB/GKB)](#save-sendloanapplicationinfo)
 
-**3. Внутренние проверки
+**3. Internal Check Chain**
    * `susnCheck` -> [`GetSusnStatus` (GetSusnSubject)](#save-getsusnstatus)
    * `militCheck` -> [`GetArmyStatus`](#save-getarmystatus)
 
@@ -31,7 +32,7 @@
 * **URL:** `https://pkb-pr.zaman.redmadrobot.com/save`
 * **Аутентификация:** Basic Auth (используйте логин и пароль, предоставленные для мок-сервиса).
 * **Параметры Запроса (Query Parameters):**
-    * `user_id` (Обязательный): Уникальный идентификатор (например, ID пользователя, название тестового сценария).
+    * `user_id` (Обязательный): Уникальный идентификатор (например, `test_user_scenario1`, `user1_kgd22_debts`).
     * `endpoint` (Обязательный): Относительный путь реального эндпоинта PKB. **Внимание:** Если эндпоинт содержит параметры пути (например, `{iin}`), укажите *конкретное значение* (например, `/gbdflinfo/v1/clients/111222333444`). Query параметры (`?param=value`) в `endpoint` указывать *не нужно*.
     * `method` (Обязательный): HTTP метод (`GET`, `POST`).
     * `http_status_code` (Опциональный): HTTP статус ответа (по умолчанию `200`).
@@ -46,13 +47,27 @@
 * **Endpoint:** `/jursearch/v1/external/send-request`
 * **Method:** `POST`
 
+**Пример: Успешный ответ (NotRestricted)**
+
 ```bash
 curl -X POST \
-  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-jursearch&endpoint=/jursearch/v1/external/send-request&method=POST&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-jursearch&endpoint=/jursearch/v1/external/send-request&method=POST&http_status_code=200)' \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=jursearch_success&endpoint=/jursearch/v1/external/send-request&method=POST&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Djursearch_success%26endpoint%3D/jursearch/v1/external/send-request%26method%3DPOST%26http_status_code%3D200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
   -H 'Content-Type: application/json' \
-  -d '{ "requestNumber": "MOCK-AAIY-131131", "code": "OK", "message": "Mock Success (JurSearch)", "data": { "binIin": "050101500090", "name": "Mock ИП Қуанышұлы", "oked": { "code": "96090", "name": "Mock Предоставление прочих услуг" }, "krp": { "code": "105", "name": "Mock Малые предприятия" }, "kse": { "code": "1122", "name": "Mock Самостоятельно занятые" }, "katoCode": "434035100", "katoId": "260483", "katoAddress": "Mock Address", "fio": "Mock ФИО", "ip": "true", "krpBf": { "code": "105", "name": "Mock Малые предприятия" } } }'
+  -d '{ "Iin": "111222333444", "OkedName": "Test Activity", "OkedCode": "NotRestricted" }'
 ````
+
+**Пример: Неуспешный ответ (Restricted)**
+
+Bash
+
+```bash
+curl -X POST \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=jursearch_restricted&endpoint=/jursearch/v1/external/send-request&method=POST&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Djursearch_restricted%26endpoint%3D/jursearch/v1/external/send-request%26method%3DPOST%26http_status_code%3D200)' \
+  -u 'YOUR_USERNAME:YOUR_PASSWORD' \
+  -H 'Content-Type: application/json' \
+  -d '{ "Iin": "111222333444", "OkedName": "Restricted Activity", "OkedCode": "Restricted" }'
+```
 
 ### <a name="save-getpersonalinfobyiin"></a>2. Сохранение Мока для `GetPersonalInfoByIin`
 
@@ -64,10 +79,10 @@ Bash
 
 ```bash
 curl -X POST \
-  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-personalinfo&endpoint=/gbdflinfo/v1/clients/111222333444&method=GET&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-personalinfo&endpoint=/gbdflinfo/v1/clients/111222333444&method=GET&http_status_code=200)' \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=personalinfo_111222333444&endpoint=/gbdflinfo/v1/clients/111222333444&method=GET&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Dpersonalinfo_111222333444%26endpoint%3D/gbdflinfo/v1/clients/111222333444%26method%3DGET%26http_status_code%3D200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
   -H 'Content-Type: application/json' \
-  -d '{ "code": "OK", "message": "Mock Success (PersonalInfo)", "data": { "request_id": "mock-17060", "status_code": "VALID", "person_data": { "iin": "111222333444", "surname": "MOCK_SURNAME", "name": "MOCK_NAME", "patronymic": "MOCK_PATRONYMIC", "dob": "1990-01-01", "gender": { "code": "1", "name_kz": "Ер", "name_ru": "Мужской" }, "nationality": { "code": "005", "name_kz": "ҚАЗАҚ", "name_ru": "КАЗАХ" } }, "person_photo_data": { "response": { "responseData": { "data": { "message_result": { "code": "00000", "name_ru": "Сообщение успешно обработано" } } } } } } }'
+  -d '{ "Iin": "111222333444", "Name": "Иван", "Surname": "Иванов", "Patronymic": "Иванович", "EngSurname": "Ivanov", "EngName": "Ivan", "Dob": "1990-01-01", "Gender": { "Code": "1", "NameKZ": "Ер", "NameRU": "Мужчина" }, "Nationality": { "Code": "2", "NameKZ": "Қазақ", "NameRU": "Казах" }, "Citizenship": { "Code": "3", "NameKZ": "Қазақстан", "NameRU": "Казахстан" }, "LifeStatus": { "Code": "4", "NameKZ": "Тірі", "NameRU": "Жив" }, "BirthPlace": { "City": "Алматы", "Country": { "Code": "3", "NameKZ": "Қазақстан", "NameRU": "Казахстан" }, "District": { "Code": "5", "NameKZ": "Бостандық", "NameRU": "Бостандыкский" }, "Region": { "Code": "6", "NameKZ": "Алматы", "NameRU": "Алматы" } }, "Address": { "Street": "Абая", "Building": "10", "Flat": "25", "BeginDate": "2010-05-15", "Country": { "Code": "3", "NameKZ": "Қазақстан", "NameRU": "Казахстан" }, "District": { "Code": "5", "NameKZ": "Бостандық", "NameRU": "Бостандыкский" }, "Region": { "Code": "6", "NameKZ": "Алматы", "NameRU": "Алматы" } }, "AddressTemp": [ { "Type": { "Code": "1", "NameKZ": "Уақытша", "NameRU": "Временный" }, "City": "Нур-Султан", "Street": "Кунаева", "Building": "20", "Flat": "5", "BeginDate": "2022-01-01", "EndDate": "2023-01-01" } ], "Documents": [ { "Number": "123456789", "BeginDate": "2015-06-01", "EndDate": "2025-06-01", "Surname": "Иванов", "Name": "Иван", "Patronymic": "Иванович", "BirthDate": "1990-01-01", "Type": { "Code": "10", "NameKZ": "ЖСН", "NameRU": "Паспорт" }, "IssueOrg": { "Code": "20", "NameKZ": "ІІМ", "NameRU": "МВД" }, "Status": { "Code": "30", "NameKZ": "Жарамды", "NameRU": "Действителен" } } ], "PersonPhotoDates": [ { "Iin": "111222333444", "CodeTypeDock": "10", "NumDock": "123456789", "Photo": "base64encodedstring" } ] }'
 ```
 
 ### <a name="save-getpermitdocumentsbyiin"></a>3. Сохранение Мока для `GetPermitDocumentsByIin`
@@ -75,14 +90,28 @@ curl -X POST \
 - **Endpoint:** `/gbdel-universal/v1/external/send-request`
 - **Method:** `POST`
 
+**Пример: Успешный ответ (NotRestricted)**
+
 Bash
 
 ```bash
 curl -X POST \
-  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-permitdocs&endpoint=/gbdel-universal/v1/external/send-request&method=POST&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-permitdocs&endpoint=/gbdel-universal/v1/external/send-request&method=POST&http_status_code=200)' \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=permitdocs_success&endpoint=/gbdel-universal/v1/external/send-request&method=POST&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Dpermitdocs_success%26endpoint%3D/gbdel-universal/v1/external/send-request%26method%3DPOST%26http_status_code%3D200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
   -H 'Content-Type: application/json' \
-  -d '{ "code": "200", "message": "Mock OK (PermitDocs)", "data": { "response": { "responseData": { "data": { "reqNum": "MOCK-IHEI-805067", "licenses": { "taxpayerLicense": [ { "globalUniqueNumber": "MOCK-R16000289", "activityType": { "code": "33", "nameRu": "Mock Разрешение на радиочастоты" }, "licensiar": { "code": "D1", "nameRu": "Mock Комитет телекоммуникаций" }, "validityStartDate": "2020-01-01T10:00:00", "validityEndDate": "2025-01-01T10:00:00", "documentId": "mock-doc-id-123" } ] }, "request": { "iinBin": "sender_iin", "pageIndex": "1", "pageSize": "10" }, "systemInfo": { "messageId": "mock-msg-id", "responseCode": "00000" } } } } } }'
+  -d '{ "Iin": "111222333444", "ActivityTypes": [ { "Code": "NotRestricted", "NameRu": "Деятельность разрешена", "NameKz": "Қызметке рұқсат етілген" } ] }'
+```
+
+**Пример: Неуспешный ответ (Restricted)**
+
+Bash
+
+```bash
+curl -X POST \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=permitdocs_restricted&endpoint=/gbdel-universal/v1/external/send-request&method=POST&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Dpermitdocs_restricted%26endpoint%3D/gbdel-universal/v1/external/send-request%26method%3DPOST%26http_status_code%3D200)' \
+  -u 'YOUR_USERNAME:YOUR_PASSWORD' \
+  -H 'Content-Type: application/json' \
+  -d '{ "Iin": "111222333444", "ActivityTypes": [ { "Code": "Restricted", "NameRu": "Деятельность ограничена", "NameKz": "Қызмет шектелген" } ] }'
 ```
 
 ### <a name="save-createreport"></a>4. Сохранение Мока для `CreateReport`
@@ -90,14 +119,13 @@ curl -X POST \
 - **Endpoint:** `/xdata/v1/v1/report/create`
 - **Method:** `POST`
 
-Bash
 
 ```bash
 curl -X POST \
-  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-createreport&endpoint=/xdata/v1/v1/report/create&method=POST&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-createreport&endpoint=/xdata/v1/v1/report/create&method=POST&http_status_code=200)' \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=createreport_success&endpoint=/xdata/v1/v1/report/create&method=POST&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Dcreatereport_success%26endpoint%3D/xdata/v1/v1/report/create%26method%3DPOST%26http_status_code%3D200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
   -H 'Content-Type: application/json' \
-  -d '{ "status": "OK", "report_id": "mock-report-uuid-12345", "ready_percentage": 0 }'
+  -d '{ "ReportID": "mock-report-id-123", "ReadyPercentage": 80, "Status": "OK" }'
 ```
 
 ### <a name="save-getreportstatus"></a>5. Сохранение Мока для `GetReportStatus`
@@ -105,14 +133,13 @@ curl -X POST \
 - **Endpoint:** `/xdata/v1/v1/report/status`
 - **Method:** `GET`
 
-Bash
 
 ```bash
 curl -X POST \
-  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-reportstatus&endpoint=/xdata/v1/v1/report/status&method=GET&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-reportstatus&endpoint=/xdata/v1/v1/report/status&method=GET&http_status_code=200)' \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=reportstatus_completed&endpoint=/xdata/v1/v1/report/status&method=GET&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Dreportstatus_completed%26endpoint%3D/xdata/v1/v1/report/status%26method%3DGET%26http_status_code%3D200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
   -H 'Content-Type: application/json' \
-  -d '{ "status": "COMPLETED", "report_id": "mock-report-uuid-12345", "ready_percentage": 100 }'
+  -d '{ "ReportID": "mock-report-id-123", "ReadyPercentage": 100, "Status": "OK" }'
 ```
 
 ### <a name="save-getreport"></a>6. Сохранение Мока для `GetReport`
@@ -120,14 +147,26 @@ curl -X POST \
 - **Endpoint:** `/xdata/v1/v1/report/get`
 - **Method:** `GET`
 
-Bash
+**Пример: Ответ с мобильным источником (KGD22) без долгов**
+
 
 ```bash
 curl -X POST \
-  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-getreport&endpoint=/xdata/v1/v1/report/get&method=GET&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-getreport&endpoint=/xdata/v1/v1/report/get&method=GET&http_status_code=200)' \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=getreport_mobile_no_debt&endpoint=/xdata/v1/v1/report/get&method=GET&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Dgetreport_mobile_no_debt%26endpoint%3D/xdata/v1/v1/report/get%26method%3DGET%26http_status_code%3D200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
   -H 'Content-Type: application/json' \
-  -d '{ "sources": [ { "name": { "ru": "Mock Источник 1", "kk": "Mock Дереккөз 1" }, "status": 1, "code": "MOCK01", "url": "[http://mock.url](http://mock.url)", "date_updated": "2025-01-01T12:00:00Z", "date_actual": "2025-01-01T12:00:00Z", "infos": [ { "ru": [ { "title": "Mock Title", "value": "Mock Value" } ] } ] } ], "reportID": "mock-report-uuid-12345" }'
+  -d '{ "ReportId": "mock-report-id-456", "Sources": [ { "Code": "KGD29" }, { "Code": "KGD22", "Status": 1, "Infos": [ { "DetailsKk": [ { "Title": "Барлық берешек, оның ішінде (теңге)", "Value": "0" } ], "DetailsRu": [ { "Title": "Всего задолженности (тенге)", "Value": "0" } ] } ] } ] }'
+```
+
+**Пример: Ответ с источником KGD22 с долгами**
+
+
+```bash
+curl -X POST \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=getreport_kgd22_with_debt&endpoint=/xdata/v1/v1/report/get&method=GET&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Dgetreport_kgd22_with_debt%26endpoint%3D/xdata/v1/v1/report/get%26method%3DGET%26http_status_code%3D200)' \
+  -u 'YOUR_USERNAME:YOUR_PASSWORD' \
+  -H 'Content-Type: application/json' \
+  -d '{ "ReportId": "mock-report-id-789", "Sources": [ { "Code": "KGD22", "Status": 1, "Infos": [ { "DetailsKk": [ { "Title": "Барлық берешек, оның ішінде (теңге)", "Value": "123456" } ], "DetailsRu": [ { "Title": "Всего задолженности (тенге)", "Value": "123456" } ] } ] } ] }'
 ```
 
 ### <a name="save-sendloanapplicationinfo"></a>7. Сохранение Мока для `SendLoanApplicationInfo`
@@ -135,9 +174,9 @@ curl -X POST \
 - **Endpoint:** `/credit-app-v2/credit/loan`
 - **Method:** `POST`
 
-Bash
 
 ```bash
+# Используем пример из предыдущего ответа, т.к. новая структура не предоставлена
 curl -X POST \
   '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-sendloaninfo&endpoint=/credit-app-v2/credit/loan&method=POST&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-sendloaninfo&endpoint=/credit-app-v2/credit/loan&method=POST&http_status_code=200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
@@ -150,9 +189,9 @@ curl -X POST \
 - **Endpoint:** `/susn-status-v2/v1/subject`
 - **Method:** `POST`
 
-Bash
 
 ```bash
+# Используем пример из предыдущего ответа, т.к. новая структура не предоставлена
 curl -X POST \
   '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-susnstatus&endpoint=/susn-status-v2/v1/subject&method=POST&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-susnstatus&endpoint=/susn-status-v2/v1/subject&method=POST&http_status_code=200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
@@ -166,14 +205,12 @@ curl -X POST \
 - **Method:** `GET`
 - **Пример для IIN:** `555666777888`
 
-Bash
 
 ```bash
+# Используем пример из предыдущего ответа, т.к. новая структура не предоставлена
 curl -X POST \
-  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-armystatus&endpoint=/recruit/v1/555666777888&method=GET&http_status_code=200](https://pkb-pr.zaman.redmadrobot.com/save?user_id=test-user-armystatus&endpoint=/recruit/v1/555666777888&method=GET&http_status_code=200)' \
+  '[https://pkb-pr.zaman.redmadrobot.com/save?user_id=armystatus_555666777888&endpoint=/recruit/v1/555666777888&method=GET&http_status_code=200](https://www.google.com/search?q=https://pkb-pr.zaman.redmadrobot.com/save%3Fuser_id%3Darmystatus_555666777888%26endpoint%3D/recruit/v1/555666777888%26method%3DGET%26http_status_code%3D200)' \
   -u 'YOUR_USERNAME:YOUR_PASSWORD' \
   -H 'Content-Type: application/json' \
   -d '{ "iin": "555666777888", "status": true, "date": "2024-10-01" }'
 ```
-
----
