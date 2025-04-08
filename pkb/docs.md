@@ -48,22 +48,41 @@
 
 * **Endpoint:** `/jursearch/v1/external/send-request`
 * **Method:** `POST`
+* StatusCode: 200
 
 **Успешный ответ (NotRestricted):**
-```bash
-curl 'https://pkb-pr.zaman.redmadrobot.com/save?user_id=e1aae679-79de-4a66-9d9f-8f7fcc7a7d9c&endpoint=/jursearch/v1/external/send-request&method=POST&http_status_code=200' \
-  -u 'admin:secret' \
-  -d '{ "Iin": "111222333444", "OkedName": "Test Activity", "OkedCode": "NotRestricted" }'
+```json
+{
+  "requestNumber": "AAIY-131131",
+  "code": "OK",
+  "message": "Success",
+  "data": {
+    "binIin": "050101500090",
+    "name": "ИП Қуанышұлы",
+    "oked": {
+      "code": "96090",
+      "name": "Предоставление прочих индивидуальных услуг, не  включенных в другие группировки"
+    },
+    "krp": {
+      "code": "105",
+      "name": "Малые предприятия (<= 5)"
+    },
+    "kse": {
+      "code": "1122",
+      "name": "Самостоятельно занятые лица"
+    },
+    "katoCode": "434035100",
+    "katoId": 260483,
+    "katoAddress": "КЫЗЫЛОРДИНСКАЯ ОБЛАСТЬ, ЖАНАКОРГАНСКИЙ РАЙОН, АККУИКСКИЙ С.О., С.БИРЛИК",
+    "fio": "ҚУАНЫШҰЛЫ ӘДІЛБЕК",
+    "ip": true,
+    "kfs": {},
+    "krpBf": {
+      "name": "Малые предприятия (<= 5)"
+    }
+  }
+}
 ````
-
-**Ответ с ограничением (Restricted):**
-
-
-```bash
-curl 'https://pkb-pr.zaman.redmadrobot.com/save?user_id=e1aae679-79de-4a66-9d9f-8f7fcc7a7d9c&endpoint=/jursearch/v1/external/send-request&method=POST&http_status_code=200' \
-  -u 'admin:secret' \
-  -d '{ "Iin": "111222333444", "OkedName": "Restricted Activity", "OkedCode": "Restricted" }'
-```
 
 ### <a name="save-getpersonalinfobyiin"></a>2. `GetPersonalInfoByIin`
 
