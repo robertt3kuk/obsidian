@@ -88,6 +88,7 @@
 
 - **Endpoint:** `/gbdflinfo/v1/clients/{iin}` (Пример для IIN `111222333444`)
 - **Method:** `GET`
+- StatusCode: 200
 
 
 ```bash
