@@ -17,7 +17,9 @@
    * [`GetReport`](#save-getreport) (Без долгов / С долгами)
 
 **2. Сервис `loans` (инициатор: `sendLoanApplicationDataToPkbAndGkb`)**
-   * [`SendLoanApplicationInfo` (PKB/GKB)](#save-sendloanapplicationinfo)
+   *  [`SendLoanApplicationInfoPKB`](#save-sendloanapplicationinfoPKB)
+   *  [`SendLoanApplicationInfoGKB`](#save-sendloanapplicationinfoGKB)
+
 
 **3. Internal Check Chain**
    * `susnCheck` -> [`GetSusnStatus` (GetSusnSubject)](#save-getsusnstatus)
